@@ -25,8 +25,27 @@ export const register = async (req, res) => {
     }
 };
 
-export const login = (req, res) => {
-    //operations
+export const login = async (req, res) => {
+    const {username,password} = req.body;
+    try {
+    // if the user exists:
+    const user = await prisma.user.findUnique({
+        where:{username}
+    })
+    if(!user){
+        res.status(401).json({message:"Invalid credentials!"})
+    }
+    //checking password:
+    const isPasswwordValid = await argon2.compare(password,user.password);
+    if(!isPasswwordValid) return res.status(500).json({message:"Failed to login!"})
+
+    //generaing cookie token and sending to the user
+    res.setHeader("Set-Cookie" , "test=" + "myValue").json("success")
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message:"failed to login"})
+    }
+    
 };
 
 export const logout = (req, res) => {
