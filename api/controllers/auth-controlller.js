@@ -1,5 +1,9 @@
 import argon2 from 'argon2';
 import prisma from '../lib/prisma.js';
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config()
+
 
 export const register = async (req, res) => {
     try {
@@ -35,17 +39,32 @@ export const login = async (req, res) => {
     if(!user){
         res.status(401).json({message:"Invalid credentials!"})
     }
+    
     //checking password:
     const isPasswwordValid = await argon2.verify(user.password,password);
+
     if(!isPasswwordValid) return res.status(500).json({message:"Failed to login!"})
 
     //generaing cookie token and sending to the user
-    // res.setHeader("Set-Cookie" , "test=" + "myValue").json("success")
-    res.cookie("test","value",{
+    const age = 1000 * 60 * 60 * 24 ;
+
+    const token = jwt.sign(
+        {
+            id:user.id
+        },
+        process.env.JWT_KEY,
+        {
+            expiresIn: age
+        })
+
+   
+    res.cookie("token",token,{
         httpOnly: true,
         // secure: true,
+        maxAge: age
     }).status(200)
     .json({message:"Login Succesfully!"})
+
     }catch(err){
         console.log(err)
         res.status(500).json({message:"failed to login"})
