@@ -3,6 +3,7 @@ import postRoute from "./routes/post.route.js"
 import authRoute from "./routes/auth.route.js"
 import  { MongoClient } from "mongodb"
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser"
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const app = express() //now our app is ready
 const client = new MongoClient(url)
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api/posts",postRoute);
 app.use("/api/auth",authRoute);
