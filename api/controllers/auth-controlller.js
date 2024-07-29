@@ -39,7 +39,7 @@ export const login = async (req, res) => {
     if(!user){
         res.status(401).json({message:"Invalid credentials!"})
     }
-    
+
     //checking password:
     const isPasswwordValid = await argon2.verify(user.password,password);
 
@@ -73,5 +73,7 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-    //operations
+
+    res.clearCookie("token").status(200).json({mesage: "Logout Succesfully!"})
+    
 };
