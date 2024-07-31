@@ -8,7 +8,7 @@ dotenv.config()
 export const register = async (req, res) => {
     try {
         // getting request
-        const { username, email, password } = req.body;
+        const { username,email,password } = req.body;
 
         //cryptation of password
         const hashedPasssword = await argon2.hash(password);
@@ -25,7 +25,7 @@ export const register = async (req, res) => {
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
         console.error('Error creating user:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: "Failed to create user!" });
     }
 };
 

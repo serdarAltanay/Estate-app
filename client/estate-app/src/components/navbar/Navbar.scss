@@ -1,0 +1,32 @@
+nav{
+    display: flex;
+    justify-content: center;
+    background-color: bisque;
+    .container{
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90vw;
+        .left{
+            flex: 3;
+            .logo{
+                text-decoration: none;
+                span{
+                    color: black;
+                    font-size: 30px;
+                }
+            }
+        }
+        .right{
+            flex: 2;
+            display: flex;
+            justify-content: end;
+            a{
+                padding: 10px;
+                text-decoration: none;
+                color: black;
+            }
+        }
+    }
+}

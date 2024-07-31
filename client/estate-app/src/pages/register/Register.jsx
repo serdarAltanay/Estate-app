@@ -1,13 +1,18 @@
 import "./Register.scss"
-import {Link} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
+import { Link } from "react-router-dom"
 import axios from "axios"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 function Register() {
-  const [err,setErr] = useState("")
+  const [error,setError] = useState("")
+  const [isLoading,setIsLoading] = useState(false)
 
+  const navigate = useNavigate()
   const onSubmit = async (e) =>{
     e.preventDefault()
+    setIsLoading(true)
     const formData = new FormData(e.target)
 
     const username = formData.get("username")
@@ -15,15 +20,18 @@ function Register() {
     const password = formData.get("password")
 
     try{
-      const res = await axios.post("http://localhost:8000/api/auth/register",{
-      username,email,password})
-      console.log(res.data)
+      const req = await axios.post("http://localhost:8000/api/auth/register",{
+      username,email,password}).then(
+        toast.success("User created succesfully!")
+    )
+      navigate("/login")
     }catch(err){
       console.log(err)
-      // setErr(err)
+      setError(err.response.data.message)
+      toast.error("registration failed:" + error)
+    }finally{
+      setIsLoading(false)
     }
-    
-    
   }
 
   return (
@@ -34,8 +42,9 @@ function Register() {
           <input name="username" type="text" placeholder="Username" />
           <input name="email" type="text" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
-          <button>Register</button>
-          {/* <Link to="/login">Do you have an account?</Link> */}
+          <button disabled={isLoading}>Register</button>
+          {error && <span>{error}</span>}
+          <Link to="/login">Do you have an account?</Link>
         </form>
       </div>
     </div>
