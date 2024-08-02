@@ -18,11 +18,12 @@ function Login() {
       const password = formData.get("password")
   
       try{
-        const req = await axios.post("http://localhost:8000/api/auth/login",{
+        const res = await axios.post("http://localhost:8000/api/auth/login",{
         username,password}).then(
             toast.success("User Login succesfully!")
         )
-        // navigate("/login")
+        localStorage.setItem("user", JSON.stringify(res.data))
+        navigate("/")
       }catch(err){
         console.log(err)
         setError(err.response.data.message)

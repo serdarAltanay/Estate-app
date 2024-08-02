@@ -20,7 +20,7 @@ function Register() {
     const password = formData.get("password")
 
     try{
-      const req = await axios.post("http://localhost:8000/api/auth/register",{
+      const res = await axios.post("http://localhost:8000/api/auth/register",{
       username,email,password}).then(
         toast.success("User created succesfully!")
     )
