@@ -1,14 +1,15 @@
 import { useNavigate} from "react-router-dom"
 import { Link } from "react-router-dom"
-import axios from "axios"
 import { useContext, useState } from "react"
 import { toast } from "react-toastify"
 import "./Login.scss"
 import { AuthContext } from "../../contexts/AuthContext"
+import apiRequest from "../../services/apiRequest.js"
+
 function Login() {
     const [error,setError] = useState("")
     const [isLoading,setIsLoading] = useState(false)
-    const {currentUser,updateUser} = useContext(AuthContext)
+    const {updateUser} = useContext(AuthContext)
     const navigate = useNavigate()
     const onSubmit = async (e) =>{
       e.preventDefault()
@@ -19,16 +20,15 @@ function Login() {
       const password = formData.get("password")
   
       try{
-        const res = await axios.post("http://localhost:8000/api/auth/login",{
+        const res = await apiRequest.post("/auth/login",{
         username,password})
         toast.success("User Login succesfully!")
-        // localStorage.setItem("user", JSON.stringify(res.data))
         updateUser(res.data)
         navigate("/")
       }catch(err){
         console.log(err)
-        setError(err.response.data.message)
-        toast.error("registration failed:" + error)
+        setError(err.response?.data?.message || "An Error Occureed!")
+        toast.error("Login failed:" + error)
       }finally{
         setIsLoading(false)
       } 

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import "./Navbar.scss"
 import { AuthContext } from "../../contexts/AuthContext"
 import { Link } from "react-router-dom";

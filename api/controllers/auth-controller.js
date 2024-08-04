@@ -66,7 +66,7 @@ export const login = async (req, res) => {
         maxAge: age
     }).status(200)
     .json(userInfo)
-
+    console.log(token)
     }catch(err){
         console.log(err)
         res.status(500).json({message:"failed to login"})
