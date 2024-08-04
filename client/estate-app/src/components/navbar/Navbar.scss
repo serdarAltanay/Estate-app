@@ -1,32 +1,83 @@
+a{
+  color: black;
+}
 nav{
+  align-items: center;
+  justify-content:center;
+  height: 75px;
+  width: 100%;
+  background-color: bisque;
+  .container{
+    height: 100%;
     display: flex;
-    justify-content: center;
-    background-color: bisque;
-    .container{
-        height: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 90vw;
-        .left{
-            flex: 3;
-            .logo{
-                text-decoration: none;
-                span{
-                    color: black;
-                    font-size: 30px;
-                }
-            }
-        }
-        .right{
-            flex: 2;
-            display: flex;
-            justify-content: end;
-            a{
-                padding: 10px;
-                text-decoration: none;
-                color: black;
-            }
-        }
+    align-items: center;
+    justify-content: space-between;
+    .left{
+      flex: 3;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      margin-left: 15px;
+      .logo{
+        font-weight: bold;
+        text-decoration: none;
+          span{
+            font-size: 25px;
+          }
+      }
     }
+    .right{
+      flex: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      margin-right: 15px;
+      .user{
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        img{
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-right: 20px;
+        }
+        .profile{
+          margin-left: 15px;
+          padding: 12px 24px;
+          background-color: #fece51;
+          cursor: pointer;
+          border: none;
+          position: relative;
+          
+          // .notification{
+          //   position: absolute;
+          //   top: -8px;
+          //   right: -8px;
+          //   background-color: red;
+          //   color: white;
+          //   border-radius: 50%;
+          //   width: 26px;
+          //   height: 26px;
+          //   display: flex;
+          //   align-items: center;
+          //   justify-content: center;
+          // }
+  
+        }
+      }
+    }
+    .login{
+      text-decoration: none;
+    }
+    .register {
+      text-decoration: none;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #fece51;
+      margin-left: 15px;
+    }
+  } 
 }

@@ -3,7 +3,7 @@ import Navbar from '../components/navbar/Navbar';
 import { AuthContext } from '../contexts/AuthContext';
 import { useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
-
+import "./layout.scss"
 function AuthLayout() {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);

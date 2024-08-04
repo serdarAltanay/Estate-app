@@ -1,13 +1,14 @@
 import { useNavigate} from "react-router-dom"
 import { Link } from "react-router-dom"
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { toast } from "react-toastify"
 import "./Login.scss"
+import { AuthContext } from "../../contexts/AuthContext"
 function Login() {
     const [error,setError] = useState("")
     const [isLoading,setIsLoading] = useState(false)
-
+    const {currentUser,updateUser} = useContext(AuthContext)
     const navigate = useNavigate()
     const onSubmit = async (e) =>{
       e.preventDefault()
@@ -19,10 +20,10 @@ function Login() {
   
       try{
         const res = await axios.post("http://localhost:8000/api/auth/login",{
-        username,password}).then(
-            toast.success("User Login succesfully!")
-        )
-        localStorage.setItem("user", JSON.stringify(res.data))
+        username,password})
+        toast.success("User Login succesfully!")
+        // localStorage.setItem("user", JSON.stringify(res.data))
+        updateUser(res.data)
         navigate("/")
       }catch(err){
         console.log(err)
