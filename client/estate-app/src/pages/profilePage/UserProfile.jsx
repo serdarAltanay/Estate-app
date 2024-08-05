@@ -21,11 +21,16 @@ function UserProfile() {
     const handleUpdate =() => {
       navigate("/profile/update-profile")
     }
+    const handleDelete = async () => {
+      navigate("/profile/delete-profile")
+    }
 
   return (
     <>
     <button onClick={handleLogout}>Log out</button>
     <button onClick={handleUpdate}>Update profile</button>
+    <button onClick={handleDelete}>Delete profile</button>
+
     </>
   )
 }
