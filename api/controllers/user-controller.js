@@ -1,5 +1,7 @@
 import prisma from "../lib/prisma.js";
-import upload from "../lib/multer.js";
+import { upload, deleteFile } from '../lib/multer.js';
+import path from "path";
+
 
 export const updateUser = async (req, res) => {
     const id = req.params.id;
@@ -53,7 +55,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     const id = req.params.id;
     const tokenUserId = req.userId;
-  
+    const existingUser = await prisma.user.findUnique({ where: { id } });
     if (id !== tokenUserId) {
       return res.status(403).json({ message: "Not Authorized!" });
     }
@@ -62,6 +64,9 @@ export const deleteUser = async (req, res) => {
       await prisma.user.delete({
         where: { id },
       });
+      const oldAvatar = existingUser.avatar;
+      const oldAvatarPath = path.basename(oldAvatar);
+      deleteFile(oldAvatarPath);
       res.clearCookie("token").status(200).json({mesage: "deleted Succesfully!"})
     } catch (err) {
       console.log(err);

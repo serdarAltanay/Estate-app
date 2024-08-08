@@ -2,32 +2,41 @@ import argon2 from 'argon2';
 import prisma from '../lib/prisma.js';
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import {upload} from '../lib/multer.js';
 dotenv.config()
 
 
-export const register = async (req, res) => {
-    try {
-        // getting request
-        const { username,email,password } = req.body;
-
-        //cryptation of password
-        const hashedPasssword = await argon2.hash(password);
-
-        //Creating new user with using prisma
+export const register = (req, res) => {
+    upload.single('avatar')(req, res, async (err) => {
+      if (err) {
+        console.error('Multer error:', err);
+        return res.status(500).json({ message: 'File upload error' });
+      }
+  
+      const { username, email, password } = req.body;
+      const avatarUrl = req.file ? `/uploads/${req.file.filename}` : null;
+  
+      try {
+        // Encrypt the password
+        const hashedPassword = await argon2.hash(password);
+  
+        // Create a new user with Prisma
         const newUser = await prisma.user.create({
-            data: {
-                username: username,
-                email: email,
-                password: hashedPasssword,
-            },
+          data: {
+            username,
+            email,
+            password: hashedPassword,
+            avatar: avatarUrl, // Save avatar URL to database
+          },
         });
-
+  
         res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
+      } catch (error) {
         console.error('Error creating user:', error);
-        res.status(500).json({ message: "Failed to create user!" });
-    }
-};
+        res.status(500).json({ message: 'Failed to create user!' });
+      }
+    });
+  };
 
 export const login = async (req, res) => {
     const {username,password} = req.body;
