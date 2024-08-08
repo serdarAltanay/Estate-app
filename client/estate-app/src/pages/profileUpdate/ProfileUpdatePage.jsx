@@ -73,7 +73,7 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-      <img src={ currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
+      <img className="avatar"src={currentUser.avatar ? `http://localhost:8000${currentUser.avatar}` : "/noavatar.jpg"}  alt="" />
       </div>
     </div>
   );

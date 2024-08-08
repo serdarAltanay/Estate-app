@@ -1,0 +1,13 @@
+.uploadWidget{
+    height: 100%;
+    width: 100%;
+    display:flex ;
+    .title{
+        flex: 2;
+        padding: 10px
+    }
+    .form{
+        flex: 3;
+    }
+
+}

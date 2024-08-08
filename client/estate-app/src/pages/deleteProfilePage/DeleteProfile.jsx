@@ -31,7 +31,7 @@ function DeleteProfile() {
     } catch (err) {
       console.log(err);
       setError("Profile deletion failed.");
-      toast.error(`Profile deletion failed: ${err.response ? err.response.data.message : err.message}`);
+      toast.error(`Profile deletion failed: ${error}`);
     } finally {
       setIsLoading(false);
     }

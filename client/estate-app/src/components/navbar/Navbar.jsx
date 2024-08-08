@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const {currentUser} = useContext(AuthContext)
 
-  
   return (
     <nav>
         <div className="container">
@@ -19,7 +18,7 @@ function Navbar() {
             <div className="right">
                   {currentUser ? (
                   <div className="user">
-                    <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
+                    <img src={currentUser.avatar ? `http://localhost:8000${currentUser.avatar}` : "/noavatar.jpg"}  alt="" />
                     <span>{currentUser.username}</span>
                     <Link to="/profile" className="profile">
                       {/* {number > 0 && <div className="notification">{number}</div>} */}

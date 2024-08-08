@@ -6,12 +6,13 @@ import testRoute from "./routes/test.route.js"
 import userRoute from "./routes/user.route.js"
 import  { MongoClient } from "mongodb"
 import dotenv from "dotenv"
+import path from "path"
+import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser"
 
 dotenv.config();
 
 const url = process.env.DATABASE_URL
-
 const app = express() //now our app is ready
 
 const client = new MongoClient(url)
@@ -19,6 +20,11 @@ const client = new MongoClient(url)
 app.use(cors({origin: process.env.CLIENT_SIDE_URL, credentials:true}))
 app.use(express.json())
 app.use(cookieParser())
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/posts",postRoute);
 app.use("/api/auth",authRoute);

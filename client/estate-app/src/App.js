@@ -8,6 +8,7 @@ import Login from './pages/login/Login.jsx';
 import UserProfile from './pages/profilePage/UserProfile.jsx';
 import ProfileUpdatePage from './pages/profileUpdate/ProfileUpdatePage.jsx';
 import DeleteProfile from './pages/deleteProfilePage/DeleteProfile.jsx';
+import UploadAvatar from './components/uploadImage/UploadImage.jsx';
 import HomePage from './pages/homePage/HomePage.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,6 +24,8 @@ function App() {
           </Route>
           <Route path='/' element={<AuthLayout/>}>
             <Route path='profile/update-profile' element={<ProfileUpdatePage/>}/>
+            <Route path='profile/update-avatar' element={<UploadAvatar/>}/>
+
             <Route path='profile/delete-profile' element={<DeleteProfile/>}/>
             <Route path='profile' element={<UserProfile/>}/>         
           </Route>

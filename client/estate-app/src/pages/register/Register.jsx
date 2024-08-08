@@ -5,6 +5,7 @@ import axios from "axios"
 import { useState } from "react"
 import { toast } from "react-toastify"
 
+
 function Register() {
   const [error,setError] = useState("")
   const [isLoading,setIsLoading] = useState(false)
@@ -18,16 +19,16 @@ function Register() {
     const username = formData.get("username")
     const email = formData.get("email")
     const password = formData.get("password")
-
+    
     try{
       await axios.post("http://localhost:8000/api/auth/register",{
-      username,email,password}).then(
-        toast.success("User created succesfully!")
-    )
+        username,email,password}).then(
+        toast.success("User created succesfully")
+      )
       navigate("/login")
     }catch(err){
       console.log(err)
-      setError(err.response.data.message)
+      setError(err)
       toast.error("registration failed:" + error)
     }finally{
       setIsLoading(false)

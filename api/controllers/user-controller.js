@@ -1,4 +1,5 @@
 import prisma from "../lib/prisma.js";
+import upload from "../lib/multer.js";
 
 export const updateUser = async (req, res) => {
     const id = req.params.id;
@@ -67,4 +68,35 @@ export const deleteUser = async (req, res) => {
       res.status(500).json({ message: "Failed to delete user!" });
     }
   };
+  
+  export const uploadAvatar = async (req, res) => {
+    upload.single('avatar')(req, res, async (err) => {
+      if (err) {
+        console.error('Multer error:', err);
+        return res.status(500).json({ message: 'File upload error' });
+      }
+  
+      const id = req.params.id;
+      const file = req.file;
+  
+      if (!file) {
+        return res.status(400).json({ message: 'No file uploaded' });
+      }
+  
+      const avatarUrl = `/uploads/${file.filename}`;
+  
+      try {
+        console.log(`Updating user ${id} with avatar URL: ${avatarUrl}`);
+        const updatedUser = await prisma.user.update({
+          where: { id },
+          data: { avatar: avatarUrl },
+        });
+        res.status(200).json({ message: 'Avatar uploaded successfully', user: updatedUser });
+      } catch (err) {
+        console.error('Error updating user avatar:', err);
+        res.status(500).json({ message: 'Failed to upload avatar' });
+      }
+    });
+  }
+  
   
