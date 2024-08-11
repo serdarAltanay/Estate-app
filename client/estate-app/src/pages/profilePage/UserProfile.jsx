@@ -24,12 +24,17 @@ function UserProfile() {
     const handleDelete = async () => {
       navigate("/profile/delete-profile")
     }
+    const handlePassword = async () => {
+      navigate("/profile/change-password")
+    }
 
   return (
     <>
     <button onClick={handleLogout}>Log out</button>
     <button onClick={handleUpdate}>Update profile</button>
     <button onClick={handleDelete}>Delete profile</button>
+    <button onClick={handlePassword}>Change Password</button>
+
 
     </>
   )

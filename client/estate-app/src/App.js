@@ -12,6 +12,7 @@ import UploadAvatar from './components/uploadImage/UploadImage.jsx';
 import HomePage from './pages/homePage/HomePage.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UpdatePassword from './pages/passwordUpdatePage/UpdatePassword.jsx';
 function App() {
   return (
     <>
@@ -25,7 +26,7 @@ function App() {
           <Route path='/' element={<AuthLayout/>}>
             <Route path='profile/update-profile' element={<ProfileUpdatePage/>}/>
             <Route path='profile/update-avatar' element={<UploadAvatar/>}/>
-
+            <Route path='profile/change-password' element={<UpdatePassword/>}/>
             <Route path='profile/delete-profile' element={<DeleteProfile/>}/>
             <Route path='profile' element={<UserProfile/>}/>         
           </Route>

@@ -1,6 +1,7 @@
 import prisma from "../lib/prisma.js";
 import { upload, deleteFile } from '../lib/multer.js';
 import path from "path";
+import argon2  from "argon2";
 
 
 export const updateUser = async (req, res) => {
@@ -102,6 +103,32 @@ export const deleteUser = async (req, res) => {
         res.status(500).json({ message: 'Failed to upload avatar' });
       }
     });
+  }
+
+  export const changePasswordNormally = async (req,res) =>{
+    const {oldPassword,newPassword} = req.body
+    const id = req.params.id
+    const user = await prisma.user.findUnique({
+      where:{id}
+    })
+
+    const isPasswwordValid = await argon2.verify(user.password,oldPassword);
+    if(!isPasswwordValid) return res.status(500).json({message:"Failed to verify user!"})
+
+    try{
+      const hashedNewPassword = await argon2.hash(newPassword);
+
+      await prisma.user.update({
+        where: { id },
+        data: {
+            password:hashedNewPassword
+        }
+      });
+      res.clearCookie("token").status(200).json({mesage: "password chanced Succesfully!"})
+    }catch(err){
+      console.log(err);
+      res.status(500).json({ message: "Failed to update password!" });
+    }
   }
   
   

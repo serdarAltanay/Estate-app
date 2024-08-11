@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import apiRequest from "../../services/apiRequest.js";
+import UploadAvatar from "../../components/uploadImage/UploadImage.jsx";
 
 
 function ProfileUpdatePage() {
@@ -14,6 +15,7 @@ function ProfileUpdatePage() {
   const [error, setError] = useState("");
 
   const { currentUser, updateUser } = useContext(AuthContext);
+
 
   useEffect(() => {
     if (currentUser) {
@@ -74,6 +76,7 @@ function ProfileUpdatePage() {
       </div>
       <div className="sideContainer">
       <img className="avatar"src={currentUser.avatar ? `http://localhost:8000${currentUser.avatar}` : "/noavatar.jpg"}  alt="" />
+      <UploadAvatar/>
       </div>
     </div>
   );
