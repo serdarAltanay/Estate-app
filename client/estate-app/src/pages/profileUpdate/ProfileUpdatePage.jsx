@@ -76,7 +76,7 @@ function ProfileUpdatePage() {
       </div>
       <div className="sideContainer">
       <img className="avatar"src={currentUser.avatar ? `http://localhost:8000${currentUser.avatar}` : "/noavatar.jpg"}  alt="" />
-      <UploadAvatar/>
+      <UploadAvatar className="uploadWidget"/>
       </div>
     </div>
   );

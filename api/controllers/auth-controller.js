@@ -5,7 +5,6 @@ import dotenv from "dotenv"
 import {upload} from '../lib/multer.js';
 dotenv.config()
 
-
 export const register = (req, res) => {
     upload.single('avatar')(req, res, async (err) => {
       if (err) {
@@ -21,7 +20,7 @@ export const register = (req, res) => {
         const hashedPassword = await argon2.hash(password);
   
         // Create a new user with Prisma
-        const newUser = await prisma.user.create({
+        await prisma.user.create({
           data: {
             username,
             email,

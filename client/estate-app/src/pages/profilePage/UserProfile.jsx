@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import "./UserProfile.scss"
 import { toast } from "react-toastify"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import apiRequest from '../../services/apiRequest'
+
 
 function UserProfile() {
     const navigate = useNavigate()
@@ -34,6 +35,9 @@ function UserProfile() {
     <button onClick={handleUpdate}>Update profile</button>
     <button onClick={handleDelete}>Delete profile</button>
     <button onClick={handlePassword}>Change Password</button>
+    <Link to="/add">
+      <button>Create Post</button>
+    </Link>
 
 
     </>
