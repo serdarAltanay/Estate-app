@@ -2,11 +2,11 @@ import argon2 from 'argon2';
 import prisma from '../lib/prisma.js';
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
-import {upload} from '../lib/multer.js';
+import {uploadAvatar} from '../lib/multer.js';
 dotenv.config()
 
 export const register = (req, res) => {
-    upload.single('avatar')(req, res, async (err) => {
+  uploadAvatar.single('avatar')(req, res, async (err) => {
       if (err) {
         console.error('Multer error:', err);
         return res.status(500).json({ message: 'File upload error' });
@@ -79,11 +79,8 @@ export const login = async (req, res) => {
         console.log(err)
         res.status(500).json({message:"failed to login"})
     }
-    
 };
 
 export const logout = (req, res) => {
-
     res.clearCookie("token").status(200).json({mesage: "Logout Succesfully!"})
-    
 };

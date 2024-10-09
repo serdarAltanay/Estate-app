@@ -1,4 +1,5 @@
 import prisma from "../lib/prisma.js"
+import { uploadPostImages } from "../lib/multer.js"
 
 
 export const getPost = async(req,res) =>{
@@ -39,25 +40,59 @@ export const getPosts = async (req,res) =>{
     
 }
 
-export const addPost = async(req,res) =>{
-    const body = req.body
-    const tokenUserId = req.userId
+export const addPost = async (req, res) => {
+    console.log("Files received:", req.files); 
+    console.log("Body:", req.body); 
+
+    const { postData, postDetail } = req.body;
+    const tokenUserId = req.userId;
+
+    if (!req.body.postData || !req.files || req.files.length === 0) {
+        return res.status(400).json({ message: "Missing required fields." });
+    }
+
+    const imageUrls = req.files.map(file => `/uploads/postimages/${file.filename}`); 
+
     try {
         const newPost = await prisma.post.create({
-            data:{
-                ...body.postData,
-                userId:tokenUserId,
-                postDetail:{
-                    create: body.postDetail,
-                }
-            }
-        })
-        res.status(200).json(newPost)
+            data: {
+                userId: tokenUserId,
+                title: postData.title,
+                price: parseInt(postData.price),
+                address: postData.address,
+                city: postData.city,
+                bedroom: parseInt(postData.bedroom),
+                bathroom: parseInt(postData.bathroom),
+                latitude:postData.latitude,
+                longitude:postData.longitude,
+                type:postData.type,
+                property:postData.property,
+                images: imageUrls,
+                postDetail: {
+                    create: {
+                        desc: postDetail.desc,
+                        utilities: postDetail.utilities,
+                        pet: postDetail.pet,
+                        income: postDetail.income,
+                        size: parseInt(postDetail.size),
+                        school: parseInt(postDetail.school),
+                        bus: parseInt(postDetail.bus),
+                        restourant: parseInt(postDetail.restaurant),
+                    },
+                },
+            },
+        });
+        res.status(200).json(newPost);
     } catch (err) {
-        console.log(err)
-        res.status(500).json()
+        console.error('Database error:', err);
+        res.status(500).json({ message: 'Failed to create post' });
     }
-}
+};
+
+  
+
+
+
 
 export const updatePost = async (req,res) =>{
     try {

@@ -1,5 +1,5 @@
 import prisma from "../lib/prisma.js";
-import { upload, deleteFile } from '../lib/multer.js';
+import { uploadAvatar, deleteFile } from '../lib/multer.js';
 import path from "path";
 import argon2  from "argon2";
 
@@ -75,8 +75,8 @@ export const deleteUser = async (req, res) => {
     }
   };
   
-  export const uploadAvatar = async (req, res) => {
-    upload.single('avatar')(req, res, async (err) => {
+  export const uploadAvatars = async (req, res) => {
+    uploadAvatar.single('avatar')(req, res, async (err) => {
       if (err) {
         console.error('Multer error:', err);
         return res.status(500).json({ message: 'File upload error' });

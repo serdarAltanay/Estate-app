@@ -7,47 +7,71 @@ import apiRequest from "../../services/apiRequest";
 
 function CreatePostPage() {
  const [value,setValue] = useState("")
- const [images,setImages] = useState([])
+ const [images, setImages] = useState([]);
  const [error,setError]= useState("")
 
- const handleSubmit= async (e) =>{
-  e.preventDefault()
-  const formData = new FormData(e.target)
-  const inputs = Object.fromEntries(formData)
+ const handleFileChange = (e) => {
+  setImages([...e.target.files]);
+};
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData();
 
+  const title = e.target.title.value;
+  const price = e.target.price.value;
+  const address = e.target.address.value;
+  const city = e.target.city.value;
+  const bedroom = e.target.bedroom.value;
+  const bathroom = e.target.bathroom.value;
+  const type = e.target.type.value;
+  const property = e.target.property.value;
+  const latitude = e.target.latitude.value;
+  const longitude = e.target.longitude.value; 
+  const size = e.target.size.value;
+  const school = e.target.school.value; 
+  const bus = e.target.bus.value; 
+  const restaurant = e.target.restaurant.value;
+  const utilities = e.target.utilities.value; 
+  const pet = e.target.pet.value;
+  const income = e.target.income.value; 
+
+  formData.append("postData[title]", title);
+  formData.append("postData[price]", price);
+  formData.append("postData[address]", address);
+  formData.append("postData[city]", city);
+  formData.append("postData[bedroom]", bedroom);
+  formData.append("postData[bathroom]", bathroom);
+  formData.append("postData[type]", type);
+  formData.append("postData[property]", property);
+  formData.append("postData[latitude]", latitude); 
+  formData.append("postData[longitude]", longitude); 
+  formData.append("postDetail[desc]", value);
+  formData.append("postDetail[size]", size); 
+  formData.append("postDetail[school]", school);
+  formData.append("postDetail[bus]", bus); 
+  formData.append("postDetail[restaurant]", restaurant); 
+  formData.append("postDetail[utilities]", utilities);
+  formData.append("postDetail[pet]", pet);
+  formData.append("postDetail[income]", income);
+
+  // Add images to formData
+  images.forEach((image) => {
+      formData.append("images", image); 
+  });
+
+  console.log("Form Data:", Object.fromEntries(formData.entries()));
 
   try {
-    const res = await apiRequest.post("/posts",{
-      postData: {
-        title: inputs.title,
-        price: parseInt(inputs.price),
-        address: inputs.address,
-        city: inputs.city,
-        bedroom: parseInt(inputs.bedroom),
-        bathroom: parseInt(inputs.bathroom),
-        type: inputs.type,
-        property: inputs.property,
-        latitude: inputs.latitude,
-        longitude: inputs.longitude,
-        images:images,
-      },
-      postDetail: {
-        desc: value,
-        utilities: inputs.utilities,
-        pet: inputs.pet,
-        income: inputs.income,
-        size: parseInt(inputs.size),
-        school: parseInt(inputs.school),
-        bus: parseInt(inputs.bus),
-        restaurant: parseInt(inputs.restaurant),
-      },
-    }) 
+      const res = await apiRequest.post("/posts", formData, {
+          withCredentials: true,
+      });
+      console.log("Response:", res.data);
   } catch (error) {
-    setError(error)
+      setError("Error uploading post: " + error.message);
   }
+};
 
 
- }
   return (
     <div className="createPostPage">
       <div className="formContainer">
@@ -70,6 +94,13 @@ function CreatePostPage() {
               <label htmlFor="desc">Description</label>
               <ReactQuill theme="snow" onChange={setValue} value={value} />
             </div>
+
+            <div className='uploadWidget item'>   
+                <h2 className='title'>Upload Images</h2>
+                <input type="file" onChange={handleFileChange} accept="image/*" multiple />
+
+            </div>
+          
             <div className="item">
               <label htmlFor="city">City</label>
               <input id="city" name="city" type="text" />
@@ -158,16 +189,6 @@ function CreatePostPage() {
         {/* {images.map((image, index) => (
           <img src={image} key={index} alt="" />
         ))} */}
-
-        {/* <UploadWidget
-          uwConfig={{
-            multiple: true,
-            cloudName: "lamadev",
-            uploadPreset: "estate",
-            folder: "posts",
-          }}
-          setState={setImages}
-        /> */}
       </div>
     </div>
   );
