@@ -1,7 +1,6 @@
 import "./createPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useState } from "react";
 import apiRequest from "../../services/apiRequest";
 
@@ -94,12 +93,6 @@ const handleSubmit = async (e) => {
               <label htmlFor="desc">Description</label>
               <ReactQuill theme="snow" onChange={setValue} value={value} />
             </div>
-
-            <div className='uploadWidget item'>   
-                <h2 className='title'>Upload Images</h2>
-                <input type="file" onChange={handleFileChange} accept="image/*" multiple />
-
-            </div>
           
             <div className="item">
               <label htmlFor="city">City</label>
@@ -189,6 +182,37 @@ const handleSubmit = async (e) => {
         {/* {images.map((image, index) => (
           <img src={image} key={index} alt="" />
         ))} */}
+         <h2 className='title'>Upload Images</h2>
+        <div className='uploadWidget'>  
+            {images.length === 0 && (
+            <input
+              type="file"
+              onChange={handleFileChange}
+              accept="image/*"
+              multiple
+            />
+          )}
+          {images.length > 0 && (
+            
+            <input
+              type="file"
+              onChange={handleFileChange}
+              accept="image/*"
+              multiple
+            />
+          )}
+            <div className="imagePreviewContainer">
+            {/* Görsel önizlemeleri */}
+            {Array.from(images).map((image, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt={`Uploaded preview ${index}`}
+                className="imagePreview"
+              />
+            ))}
+          </div>
+          </div>
       </div>
     </div>
   );
