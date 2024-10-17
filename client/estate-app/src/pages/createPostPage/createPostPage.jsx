@@ -116,7 +116,7 @@ const handleSubmit = async (e) => {
             </div>
             <div className="item">
               <label htmlFor="type">Type</label>
-              <select name="type">
+              <select name="type" required>
                 <option value="rent" defaultChecked>
                   Rent
                 </option>
