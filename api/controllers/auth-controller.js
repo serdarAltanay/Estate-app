@@ -3,6 +3,7 @@ import prisma from '../lib/prisma.js';
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import {uploadAvatar} from '../lib/multer.js';
+import asyncHandler from '../middleware/asyncHandler.js';
 dotenv.config()
 
 export const register = (req, res) => {
@@ -13,7 +14,7 @@ export const register = (req, res) => {
       }
   
       const { username, email, password } = req.body;
-      const avatarUrl = req.file ? `/uploads/${req.file.filename}` : null;
+      const avatarUrl = req.file ? `/uploads/avatar/${req.file.filename}` : null;
   
       try {
         // Encrypt the password
@@ -37,7 +38,7 @@ export const register = (req, res) => {
     });
   };
 
-export const login = async (req, res) => {
+export const login = asyncHandler(async (req, res) => {
     const {username,password} = req.body;
     try {
     // if the user exists:
@@ -70,7 +71,7 @@ export const login = async (req, res) => {
     
     res.cookie("token",token,{
         httpOnly: true,
-        // secure: true,
+        secure: process.env.NODE_ENV !== 'production' ? false : true,
         maxAge: age
     }).status(200)
     .json(userInfo)
@@ -79,7 +80,7 @@ export const login = async (req, res) => {
         console.log(err)
         res.status(500).json({message:"failed to login"})
     }
-};
+})
 
 export const logout = (req, res) => {
     res.clearCookie("token").status(200).json({mesage: "Logout Succesfully!"})

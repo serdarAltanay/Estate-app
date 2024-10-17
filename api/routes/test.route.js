@@ -4,7 +4,7 @@ import { verifyToken } from "../middleware/verifyToken.js";
 
 const test = express.Router();
 
-test.post("/should-be-logged-in",verifyToken,shouldBeLoggedIn);
+test.post("/should-be-logged-in", verifyToken, shouldBeLoggedIn);
 test.post("/should-be-admin", shouldBeAdmin);
 
 export default test;

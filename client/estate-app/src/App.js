@@ -1,5 +1,5 @@
 import './App.scss';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AuthLayout from './layouts/AuthLayout.jsx';
 import Layout from './layouts/Layout.jsx';
@@ -14,27 +14,39 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UpdatePassword from './pages/passwordUpdatePage/UpdatePassword.jsx';
 import CreatePostPage from './pages/createPostPage/createPostPage.jsx';
+import SinglePage from './pages/singlePage/SinglePage.jsx';
+import { singlePageLoader } from './services/loaders.js';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { path: '', element: <HomePage /> },
+      { path: 'register', element: <Register /> },
+      { path: 'login', element: <Login /> },
+    ],
+  },
+  {
+    path: '/',
+    element: <AuthLayout />,
+    children: [
+      { path: 'add', element: <CreatePostPage /> },
+      { path: ':id', element: <SinglePage />, loader: singlePageLoader },
+      { path: 'profile/update-profile', element: <ProfileUpdatePage /> },
+      { path: 'profile/update-avatar', element: <UploadAvatar /> },
+      { path: 'profile/change-password', element: <UpdatePassword /> },
+      { path: 'profile/delete-profile', element: <DeleteProfile /> },
+      { path: 'profile', element: <UserProfile /> },
+    ],
+  },
+]);
+
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout/>}>
-            <Route path='' element={<HomePage/>}/>
-            <Route path='register' element={<Register/>}/>
-            <Route path='login' element={<Login/>}/>          
-          </Route>
-          <Route path='/' element={<AuthLayout/>}>
-            <Route path='/add' element={<CreatePostPage/>}/>
-            <Route path='profile/update-profile' element={<ProfileUpdatePage/>}/>
-            <Route path='profile/update-avatar' element={<UploadAvatar/>}/>
-            <Route path='profile/change-password' element={<UpdatePassword/>}/>
-            <Route path='profile/delete-profile' element={<DeleteProfile/>}/>
-            <Route path='profile' element={<UserProfile/>}/>         
-          </Route>
-        </Routes>
-        <ToastContainer/>
-      </Router>
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }
