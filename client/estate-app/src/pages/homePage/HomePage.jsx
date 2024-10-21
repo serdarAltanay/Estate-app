@@ -1,20 +1,45 @@
-import "./HomePage.scss"
+import { useContext } from "react";
+import SearchBar from "../../components/searchbar/searchbar.jsx"
+import "./HomePage.scss";
+import { AuthContext } from "../../contexts/AuthContext.jsx";
 
 function HomePage() {
+
+  const {currentUser} = useContext(AuthContext)
+
   return (
     <div className="homePage">
-        <div className="container">
-            <div className="mainTitle">
-                <h1>Estate App</h1>
-                <h2>Best place to find your dream estate</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non facilis dolorem, ipsam quasi exercitationem dolore nostrum suscipit officiis! Ipsa doloremque quas fugiat inventore, reprehenderit quasi sunt, temporibus corrupti dolorem exercitationem earum quibusdam minus quod iusto laudantium, et ipsam! Possimus, reiciendis?</p>
+      <div className="textContainer">
+        <div className="wrapper">
+          <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+            explicabo suscipit cum eius, iure est nulla animi consequatur
+            facilis id pariatur fugit quos laudantium temporibus dolor ea
+            repellat provident impedit!
+          </p>
+          <SearchBar />
+          <div className="boxes">
+            <div className="box">
+              <h1>16+</h1>
+              <h2>Years of Experience</h2>
             </div>
-            <div className="side-img">
-                
+            <div className="box">
+              <h1>200</h1>
+              <h2>Award Gained</h2>
             </div>
+            <div className="box">
+              <h1>2000+</h1>
+              <h2>Property Ready</h2>
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="imgContainer">
+        <img src="/bg.png" alt="" />
+      </div>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
