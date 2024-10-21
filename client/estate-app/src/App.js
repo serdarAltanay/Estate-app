@@ -15,7 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import UpdatePassword from './pages/passwordUpdatePage/UpdatePassword.jsx';
 import CreatePostPage from './pages/createPostPage/createPostPage.jsx';
 import SinglePage from './pages/singlePage/SinglePage.jsx';
-import { singlePageLoader } from './services/loaders.js';
+import { singlePageLoader, listPageLoader } from './services/loaders.js';
+import ListPage from './pages/listPage/ListPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,13 +32,32 @@ const router = createBrowserRouter([
     path: '/',
     element: <AuthLayout />,
     children: [
-      { path: 'add', element: <CreatePostPage /> },
-      { path: ':id', element: <SinglePage />, loader: singlePageLoader },
-      { path: 'profile/update-profile', element: <ProfileUpdatePage /> },
-      { path: 'profile/update-avatar', element: <UploadAvatar /> },
-      { path: 'profile/change-password', element: <UpdatePassword /> },
-      { path: 'profile/delete-profile', element: <DeleteProfile /> },
-      { path: 'profile', element: <UserProfile /> },
+      { 
+        path: 'add',
+        element: <CreatePostPage /> },
+      { 
+        path: ':id',
+        element: <SinglePage />,
+        loader: singlePageLoader },
+        { 
+          path: '/list',
+          element: <ListPage />,
+          loader: listPageLoader },
+      { 
+        path: 'profile/update-profile', 
+        element: <ProfileUpdatePage /> },
+      { 
+        path: 'profile/update-avatar', 
+        element: <UploadAvatar /> },
+      { 
+        path: 'profile/change-password', 
+        element: <UpdatePassword /> },
+      { 
+        path: 'profile/delete-profile', 
+        element: <DeleteProfile /> },
+      { 
+        path: 'profile', 
+        element: <UserProfile /> },
     ],
   },
 ]);
