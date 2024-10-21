@@ -1,6 +1,7 @@
 import "./SinglePage.scss";
 // import Slider from "../../components/slider/Slider";
 import { useLoaderData } from "react-router-dom";
+import Map from "../../components/map/map";
 
 
 function SinglePage() {
@@ -113,9 +114,9 @@ function SinglePage() {
             </div>
           </div>
           <p className="title">Location</p>
-          {/* <div className="mapContainer">
+          <div className="mapContainer">
             <Map items={[post]} />
-          </div> */}
+          </div>
           <div className="buttons">
             
           </div>

@@ -67,6 +67,7 @@ const handleSubmit = async (e) => {
       console.log("Response:", res.data);
   } catch (error) {
       setError("Error uploading post: " + error.message);
+      console.log(error)
   }
 };
 
