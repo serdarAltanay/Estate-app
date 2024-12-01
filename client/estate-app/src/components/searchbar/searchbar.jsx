@@ -60,7 +60,7 @@ function SearchBar() {
           to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
         >
           <button>
-            <img src="/search.png" alt="" />
+          <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </Link>
       </form>
