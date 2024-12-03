@@ -1,0 +1,16 @@
+{
+  "name": "estate-app",
+  "version": "1.0.0",
+  "description": "This application is a real estate application where you can build the house you want according to the standards you want. It is a MERN app that I plan to add many features such as one-to-one messaging and map navigation.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd api && npm start\" \"cd client && cd estate-app && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
