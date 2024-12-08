@@ -105,7 +105,7 @@ function Filter() {
           />
         </div>
         <button onClick={handleFilter}>
-          <img src="/search.png" alt="" />
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors"
-import postRoute from "./routes/post.route.js"
+import postRouter from "./routes/post.route.js"
 import authRoute from "./routes/auth.route.js"
 import testRoute from "./routes/test.route.js"
 import userRoute from "./routes/user.route.js"
@@ -28,7 +28,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use("/api/posts",postRoute);
+app.use("/api/posts",postRouter);
 app.use("/api/auth",authRoute);
 app.use("/api/test",testRoute)
 app.use("/api/users",userRoute)

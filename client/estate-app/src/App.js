@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <SinglePage />,
         loader: singlePageLoader },
         { 
-          path: '/list',
+          path: 'list',
           element: <ListPage />,
           loader: listPageLoader },
       { 

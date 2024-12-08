@@ -12,27 +12,27 @@ function Card({ item }) {
           <Link to={`/${item.id}`}>{item.title}</Link>
         </h2>
         <p className="address">
-          <img src="/pin.png" alt="" />
+        <i class="fa-solid fa-location-pin"></i>
           <span>{item.address}</span>
         </p>
         <p className="price">$ {item.price}</p>
         <div className="bottom">
           <div className="features">
             <div className="feature">
-              <img src="/bed.png" alt="" />
+              <i class="fa-solid fa-bed"></i>
               <span>{item.bedroom} bedroom</span>
             </div>
             <div className="feature">
-              <img src="/bath.png" alt="" />
+              <i class="fa-solid fa-bath"></i>
               <span>{item.bathroom} bathroom</span>
             </div>
           </div>
           <div className="icons">
             <div className="icon">
-              <img src="/save.png" alt="" />
+              <i class="fa-solid fa-floppy-disk"></i>
             </div>
             <div className="icon">
-              <img src="/chat.png" alt="" />
+            <i class="fa-regular fa-comment"></i>
             </div>
           </div>
         </div>
