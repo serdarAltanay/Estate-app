@@ -15,7 +15,7 @@ function SinglePage() {
               <div className="post">
                 <h1>{post.title}</h1>
                 <div className="address">
-                  <img src="/pin.png" alt="" />
+                  <i class="fa-solid fa-location-pin"></i>
                   <span>{post.address}</span>
                 </div>
                 <div className="price">$ {post.price}</div>
@@ -33,7 +33,7 @@ function SinglePage() {
           <p className="title">General</p>
           <div className="listVertical">
             <div className="feature">
-              <img src="/utility.png" alt="" />
+              <i class="fa-solid fa-clipboard"></i>
               <div className="featureText">
               <span>Utilities</span>
               {post.postDetail.utilities ? (
@@ -48,7 +48,7 @@ function SinglePage() {
               </div>
             </div>
             <div className="feature">
-              <img src="/pet.png" alt="" />
+              <i class="fa-solid fa-dog"></i>
               <div className="featureText">
                 <span>Pet Policy</span>
                 {post.postDetail.pet === "allowed" ? (
@@ -59,7 +59,7 @@ function SinglePage() {
               </div>
             </div>
             <div className="feature">
-              <img src="/fee.png" alt="" />
+              <i class="fa-solid fa-comments-dollar"></i>
               <div className="featureText">
                 <span>Income Policy</span>
                 <p>{post.postDetail.income}</p>
@@ -69,22 +69,22 @@ function SinglePage() {
           <p className="title">Sizes</p>
           <div className="sizes">
             <div className="size">
-              <img src="/size.png" alt="" />
+              <i class="fa-solid fa-maximize"></i>
               <span>{post.postDetail.size} sqft</span>
             </div>
             <div className="size">
-              <img src="/bed.png" alt="" />
+              <i class="fa-solid fa-bed"></i>
               <span>{post.bedroom} beds</span>
             </div>
             <div className="size">
-              <img src="/bath.png" alt="" />
+              <i class="fa-solid fa-bath"></i>
               <span>{post.bathroom} bathroom</span>
             </div>
           </div>
           <p className="title">Nearby Places</p>
           <div className="listHorizontal">
             <div className="feature">
-              <img src="/school.png" alt="" />
+              <i class="fa-solid fa-school"></i>
               <div className="featureText">
                 <span>School</span>
                 <p>
@@ -96,14 +96,14 @@ function SinglePage() {
               </div>
             </div>
             <div className="feature">
-              <img src="/pet.png" alt="" />
+              <i class="fa-solid fa-dog"></i>
               <div className="featureText">
                 <span>Bus Stop</span>
                 <p>{post.postDetail.bus}m away</p>
               </div>
             </div>
             <div className="feature">
-              <img src="/fee.png" alt="" />
+              <i class="fa-solid fa-comments-dollar"></i>
               <div className="featureText">
                 <span>Restaurant</span>
                 <p>{post.postDetail.restaurant}m away</p>

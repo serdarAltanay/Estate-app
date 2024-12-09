@@ -39,10 +39,10 @@ const router = createBrowserRouter([
         path: ':id',
         element: <SinglePage />,
         loader: singlePageLoader },
-        { 
-          path: 'list',
-          element: <ListPage />,
-          loader: listPageLoader },
+      { 
+        path: 'list',
+        element: <ListPage />,
+        loader: listPageLoader },
       { 
         path: 'profile/update-profile', 
         element: <ProfileUpdatePage /> },
