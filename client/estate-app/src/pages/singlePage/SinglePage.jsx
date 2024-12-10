@@ -2,9 +2,12 @@ import "./SinglePage.scss";
 // import Slider from "../../components/slider/Slider";
 import { useLoaderData } from "react-router-dom";
 import Map from "../../components/map/map.jsx"
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext.jsx";
 
 function SinglePage() {
   const post = useLoaderData();
+  const {currentUser} = useContext(AuthContext)
   return (
     <div className="singlePage">
       <div className="details">
@@ -21,7 +24,7 @@ function SinglePage() {
                 <div className="price">$ {post.price}</div>
               </div>
               <div className="user">
-                <img src={post.user.avatar} alt="" />
+                <img src={currentUser.avatar ? `http://localhost:8000${currentUser.avatar}` : "/noavatar.jpg"}  alt="" />
                 <span>{post.user.username}</span>
               </div>
             </div>
