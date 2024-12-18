@@ -30,11 +30,11 @@ model Post {
   price      Int
   images     String[]
   address    String
+  latitude   Float
+  longitude  Float
   city       String
   bedroom    Int
   bathroom   Int
-  latitude   String
-  longitude  String
   type       Type
   property   Property
   createdAt  DateTime    @default(now())

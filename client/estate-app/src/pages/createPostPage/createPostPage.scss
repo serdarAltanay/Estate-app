@@ -1,95 +1,114 @@
 .createPostPage {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    padding-left: 20px;
-    .formContainer {
-      flex: 3;
-      overflow: scroll;
-      width: 20%;
-      overflow-x: hidden;
-    
-      .wrapper {
-        margin: 30px 50px 100px 0px;
-  
-        form {
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 20px;
-  
-          .item {
-            width: 30%;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 
-  
-            input {
-              padding: 20px;
-              border-radius: 5px;
-              border: 1px solid gray;
-            }
-  
-            select {
-              padding: 19px;
-            }
-  
-            &.description {
-              width: 100%;
-              height: 320px;
-  
-              .quill > .ql-container > .ql-editor{
-                height: 200px;
-                font-size: 16px;
-              }
-            }
-          }
-          .sendButton {
-            width: 30%;
-            border-radius: 5px;
-            border: none;
-            background-color: teal;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
+  .formContainer {
+    width: 60%;
+    .wrapper {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f8f8f8;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .item {
+        margin-bottom: 15px;
+        label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+
+        input, select {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+
+        .description {
+          .ql-container {
+            height: 200px;
           }
         }
       }
-    }
-  
-    .sideContainer {
-      flex: 2;
-      height: 89vh;
-      background-color: #fcf5f3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: scroll;
-      overflow-x: hidden;
-      .uploadWidget{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        .imagePreviewContainer {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 10px;
-          margin-top: 10px; 
-          padding: 20px;
+
+      button.sendButton {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+        &:hover {
+          background-color: #45a049;
         }
+      }
+
+      span {
+        color: red;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .sideContainer {
+    width: 35%;
+    .mapContainer {
+      position: relative;
+      height: 400px;
+      margin-bottom: 20px;
+
+      h2 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .leaflet-container {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .uploadWidget {
+      h2 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      input[type="file"] {
+        display: block;
+        margin: 10px 0;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .imagePreviewContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
         .imagePreview {
-          width: 25vw;
-          height: 30vh;
+          width: 100px;
+          height: 100px;
           object-fit: cover;
           border-radius: 5px;
-          box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
         }
       }
     }
   }
+}

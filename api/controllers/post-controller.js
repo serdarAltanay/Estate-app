@@ -54,50 +54,54 @@ export const addPost = async (req, res) => {
     console.log("Files received:", req.files); 
     console.log("Body:", req.body); 
 
-    const { postData, postDetail } = req.body;
+    const { title, price, address, city, bedroom, bathroom, latitude, longitude, type, property, size, school, bus, restaurant, utilities, pet, income, desc } = req.body;
     const tokenUserId = req.userId;
 
-    if (!req.body.postData || !req.files || req.files.length === 0) {
+    // Check for missing required fields
+    if (!title || !price || !address || !city || !bedroom || !bathroom || !type || !property) {
+        console.log("Missing required fields");
         return res.status(400).json({ message: "Missing required fields." });
     }
 
-    const imageUrls = req.files.map(file => `/uploads/postimages/${file.filename}`); 
-
+    const imageUrls = req.files ? req.files.map(file => `/uploads/postimages/${file.filename}`) : [];
+        
     try {
         const newPost = await prisma.post.create({
             data: {
                 userId: tokenUserId,
-                title: postData.title,
-                price: parseInt(postData.price),
-                address: postData.address,
-                city: postData.city,
-                bedroom: parseInt(postData.bedroom),
-                bathroom: parseInt(postData.bathroom),
-                latitude:postData.latitude,
-                longitude:postData.longitude,
-                type:postData.type,
-                property:postData.property,
+                title,
+                price: parseInt(price),
+                address,
+                city,
+                bedroom: parseInt(bedroom),
+                bathroom: parseInt(bathroom),
+                latitude: parseFloat(latitude),
+                longitude: parseFloat(longitude),
+                type,
+                property,
                 images: imageUrls,
                 postDetail: {
                     create: {
-                        desc: postDetail.desc,
-                        utilities: postDetail.utilities,
-                        pet: postDetail.pet,
-                        income: postDetail.income,
-                        size: parseInt(postDetail.size),
-                        school: parseInt(postDetail.school),
-                        bus: parseInt(postDetail.bus),
-                        restourant: parseInt(postDetail.restaurant),
+                        desc,
+                        utilities,
+                        pet,
+                        income,
+                        size: parseInt(size),
+                        school: parseInt(school),
+                        bus: parseInt(bus),
+                        restourant: parseInt(restaurant),
                     },
                 },
             },
         });
         res.status(200).json(newPost);
     } catch (err) {
-        console.error('Database error:', err);
-        res.status(500).json({ message: 'Failed to create post' });
+        console.error('Error creating post:', err); // Log the error details
+        res.status(500).json({ message: 'Failed to create post', error: err.message });
     }
 };
+
+
 
   
 
