@@ -14,7 +14,10 @@
     "concurrently": "^9.1.0"
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "leaflet": "^1.9.4",
+    "nanoid": "^5.0.9",
+    "nodemailer": "^6.9.16",
     "react-leaflet": "^5.0.0"
   }
 }

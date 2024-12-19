@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import apiRequest from '../../services/apiRequest';
+import ForgotPasswordButton from '../../components/forgotPasswordButton/ForgotPasswordButton';
 
 function UserProfile() {
   const navigate = useNavigate();
@@ -49,7 +50,6 @@ function UserProfile() {
 
   return (
     <div className="user-profile">
-      {/* User Profile Section */}
       <div className="profile-section">
         <div className="profile-picture">
         <img src={avatar ? `http://localhost:8000${avatar}` : "/noavatar.jpg"}  alt="" />
@@ -64,6 +64,7 @@ function UserProfile() {
         <button onClick={handleUpdate}>Update Profile</button>
         <button onClick={handleDelete}>Delete Profile</button>
         <button onClick={handlePassword}>Change Password</button>
+        <ForgotPasswordButton/>
         <Link to="/add">
           <button>Create Post</button>
         </Link>

@@ -28,7 +28,6 @@ const LeafletMap = ({ setLocation }) => {
 
   // Function to update location state
   const updateLocation = (newLocation) => {
-    console.log('New Location:', newLocation); // Debugging log to check values
     setLocalLocation(newLocation); // Update local state
     setLocation(newLocation); // Pass the location to the parent component
   };
@@ -37,7 +36,7 @@ const LeafletMap = ({ setLocation }) => {
     <div>
       <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '400px', width: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <LocationPicker setLocation={updateLocation} /> {/* Pass the update function to LocationPicker */}
+        <LocationPicker setLocation={updateLocation} />
         {location && (
           <Marker position={[location.lat, location.lng]} icon={customIcon}>
             <Popup>
