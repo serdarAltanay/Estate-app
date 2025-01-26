@@ -3,7 +3,11 @@ import "./map.scss";
 import "leaflet/dist/leaflet.css";
 import Pin from "../pin/pin.jsx";
 
+
+
 function Map({ items }) {
+
+  console.log("Items passed to Map:", items);
   return (
     <MapContainer
       center={
