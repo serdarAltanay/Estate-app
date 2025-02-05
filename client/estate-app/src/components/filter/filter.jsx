@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./filter.scss";
 import { useSearchParams } from "react-router-dom";
 
-function Filter() {
+function Filter({data}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
     type: searchParams.get("type") || "",
     city: searchParams.get("city") || "",
     property: searchParams.get("property") || "",
-    minPrice: searchParams.get("minPrice") || "",
-    maxPrice: searchParams.get("maxPrice") || "",
-    bedroom: searchParams.get("bedroom") || "",
+    minPrice: searchParams.get("minPrice") || 0,
+    maxPrice: searchParams.get("maxPrice") || 1000000,
+    bedroom: searchParams.get("bedroom") || 1,
   });
-
+  useEffect(()=> {
+    setQuery({
+      ...data,
+    })
+  },[data])
   const handleChange = (e) => {
     setQuery({
       ...query,
@@ -27,7 +31,7 @@ function Filter() {
   return (
     <div className="filter">
       <h1>
-        Search results for <b>{searchParams.get("city")}</b>
+        Search results for <b>{query.city}</b>
       </h1>
       <div className="top">
         <div className="item">
