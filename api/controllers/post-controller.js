@@ -118,7 +118,7 @@ export const getPosts = async (req, res) => {
 
     // Handle file uploads
     const imageUrls = req.files ? req.files.map(file => `/uploads/postimages/${file.filename}`) : [];
-
+    
     try {
         // Create a new post
         const newPost = await prisma.post.create({
@@ -127,7 +127,7 @@ export const getPosts = async (req, res) => {
                 title,
                 price: parsedPrice,
                 address,
-                city,
+                city:city.trim().toUpperCase(),
                 bedroom: parsedBedroom,
                 bathroom: parsedBathroom,
                 latitude: parsedLatitude,

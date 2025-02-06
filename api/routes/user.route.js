@@ -10,6 +10,8 @@ userRouter.put("/:id", verifyToken, updateUser);
 userRouter.post("/delete/:id", verifyToken, verifyAuth, deleteUser);
 userRouter.post("/upload-avatar/:id", verifyToken, uploadAvatars);
 userRouter.put("/change-password/:id", verifyToken, changePasswordNormally );
+// userRouter.put("/save", verifyToken, savePost );
+
 
 
 export default userRouter;
